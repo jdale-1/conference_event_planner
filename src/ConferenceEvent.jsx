@@ -54,8 +54,6 @@ const handleMealSelection = (index) => {
 
     const getItemsFromTotalCost = () => {
         const items = [];
-    };const getItemsFromTotalCost = () => {
-        const items = [];
         venueItems.forEach((item) => {
           if (item.quantity > 0) {
             items.push({ ...item, type: "venue" });
