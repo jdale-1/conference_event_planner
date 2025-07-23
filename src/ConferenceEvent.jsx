@@ -4,6 +4,7 @@ import TotalCost from "./TotalCost";
 import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
+import { toggleMealSelection } from "./mealsSlice";
 const ConferenceEvent = () => {
     const [showItems, setShowItems] = useState(false);
     const [numberOfPeople, setNumberOfPeople] = useState(1);
@@ -60,22 +61,31 @@ const handleMealSelection = (index) => {
     const ItemsDisplay = ({ items }) => {
 
     };
-     const calculateTotalCost = (section) => {
-    let totalCost = 0;
-    if (section === "venue") {
-      venueItems.forEach((item) => {
-        totalCost += item.cost * item.quantity;
-      });
-    } else if (section === "av") {
-      avItems.forEach((item) => {
-        totalCost += item.cost * item.quantity;
-      });
-    }
+    const calculateTotalCost = (section) => {
+        let totalCost = 0;
+        if (section === "venue") {
+            venueItems.forEach((item) => {
+                totalCost += item.cost * item.quantity;
+            });
+        } else if (section === "av") {
+            avItems.forEach((item) => {
+                totalCost += item.cost * item.quantity;
+            });
+        } else if (section === "meals") {
+            mealsItems.forEach((item) => {
+                if (item.selected) {
+                  totalCost += item.cost * numberOfPeople;
+                }
+              });
+        }
     return totalCost;
-  };
-  const avTotalCost = calculateTotalCost("av");
+    };
 
     const venueTotalCost = calculateTotalCost("venue");
+
+    const avTotalCost = calculateTotalCost("av");
+
+    const mealsTotalCost = calculateTotalCost("meals");
 
     const navigateToProducts = (idType) => {
         if (idType == '#venue' || idType == '#addons' || idType == '#meals') {
@@ -226,7 +236,7 @@ const handleMealSelection = (index) => {
         </div>
     ))}
 </div>
-                                <div className="total_cost">Total Cost: </div>
+<div className="total_cost">Total Cost: {mealsTotalCost}</div>
 
 
                             </div>
