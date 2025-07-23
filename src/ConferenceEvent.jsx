@@ -64,6 +64,8 @@ const handleDecrementAvQuantity = (index) => {
     }
     return totalCost;
   };
+  const avTotalCost = calculateTotalCost("av");
+  
     const venueTotalCost = calculateTotalCost("venue");
 
     const navigateToProducts = (idType) => {
@@ -179,7 +181,7 @@ const handleDecrementAvQuantity = (index) => {
         </div>
     </div>
 ))}
-                                    
+   <div className="total_cost">Total Cost: {avTotalCost}</div>                                 
                                 </div>
                                 <div className="total_cost">Total Cost:</div>
 
